@@ -21,7 +21,7 @@
 
 #Default configuration file
 CURRENT_PATH=$(cd `dirname $0`; pwd)
-CONFIG_FILE=$CURRENT_PATH/.dropbox_uploader
+#CONFIG_FILE=$CURRENT_PATH/.dropbox_uploader
 
 #Default chunk size in Mb for the upload process
 #It is recommended to increase this value only if you have enough free space on your /tmp partition
@@ -1478,33 +1478,8 @@ if [[ -e $CONFIG_FILE ]]; then
 
 #NEW SETUP...
 else
-
-    echo -ne "\n This is the first time you run this script, please follow the instructions:\n\n"
-    echo -ne " 1) Open the following URL in your Browser, and log in using your account: $APP_CREATE_URL\n"
-    echo -ne " 2) Click on \"Create App\", then select \"Dropbox API app\"\n"
-    echo -ne " 3) Now go on with the configuration, choosing the app permissions and access restrictions to your DropBox folder\n"
-    echo -ne " 4) Enter the \"App Name\" that you prefer (e.g. MyUploader$RANDOM$RANDOM$RANDOM)\n\n"
-
-    echo -ne " Now, click on the \"Create App\" button.\n\n"
-
-    echo -ne " When your new App is successfully created, please click on the Generate button\n"
-    echo -ne " under the 'Generated access token' section, then copy and paste the new access token here:\n\n"
-
-    echo -ne " # Access token: "
-    read -r OAUTH_ACCESS_TOKEN
-
-    echo -ne "\n > The access token is $OAUTH_ACCESS_TOKEN. Looks ok? [y/N]: "
-    read -r answer
-    if [[ $answer != "y" ]]; then
-        remove_temp_files
-        exit 1
-    fi
-
-    echo "OAUTH_ACCESS_TOKEN=$OAUTH_ACCESS_TOKEN" > "$CONFIG_FILE"
-    echo "   The configuration has been saved."
-
-    remove_temp_files
-    exit 0
+    echo "Configuration file not provided with -f"
+    exit 1
 fi
 
 ################
